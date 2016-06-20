@@ -29,14 +29,14 @@ socket.setdefaulttimeout(50000)
  
  
 url = "http://portal.nifa.usda.gov/web/crisprojectpages/"
-# br = mechanize.Browser()
-# br.set_handle_robots(False)  # bypass robots
-# br.set_handle_refresh(False)  # can sometimes hang without this
-# br.addheaders = [('User-agent', 'Firefox')]  # Some websites demand a user-agent that isn't a robot
+br = mechanize.Browser()
+br.set_handle_robots(False)  # bypass robots
+br.set_handle_refresh(False)  # can sometimes hang without this
+br.addheaders = [('User-agent', 'Firefox')]  # Some websites demand a user-agent that isn't a robot
 
-# # Cookie Jar
-# cj = cookielib.LWPCookieJar()
-# br.set_cookiejar(cj)
+# Cookie Jar
+cj = cookielib.LWPCookieJar()
+br.set_cookiejar(cj)
  
 # regex to clean all 'bad' elements from strings
 # str999 = re.compile('\n|\t|\r|\f|&.*?;|<.*?>|</.*?>|^[\W_]+|[\W_]+$')     #<.*?>|
@@ -49,24 +49,24 @@ path = 'C:\Users\psirma\Desktop\Personal.Projects\python\usda_scraper'.replace("
 # links = open('g:/usda_data/cris/project_html_links.txt').read().split('\n')
 # links = csv.reader(file(path+'/project_html_links_v5.csv','rb'))
 # links = csv.reader(file(path+'/bad_links_to_parse_separately.csv','rb'))
-# links = csv.reader(file(path+'/bad_links_to_parse_separately_v2.csv','rb'))
+links = csv.reader(file(path+'/bad_links_to_parse_separately_v2.csv','rb'))
 
-# proxy_handler = urllib2.ProxyHandler({})
-# opener = urllib2.build_opener(proxy_handler)
-# urllib2.install_opener(opener)
+proxy_handler = urllib2.ProxyHandler({})
+opener = urllib2.build_opener(proxy_handler)
+urllib2.install_opener(opener)
 
 
 #Output 
 outp = csv.writer(open(path+'/main_info_USDA_awards_ps.csv','ab'))
 
-# outcomereports = csv.writer(open(path+'/progress_reports_USDA_awards_ps.csv','ab'))
+outcomereports = csv.writer(open(path+'/progress_reports_USDA_awards_ps.csv','ab'))
  
 mainheader = ['Project Title', 'Sponsoring Institution', 'Project Status', 'Funding Source', 'Reporting Frequency', 'Accession No.', 'Grant No.', 'Project No.', 'Proposal No.', 'Multistate No.', 'Program Code', 'Project Start Date', 'Project End Date', 'Project Director', 'Recepient Organization', 'Organization Street', 'Organization Address', 'Performing Department', 'Non-Technical Summary', 'Animal Health Component', 'Basic', 'Applied', 'Developmental', 'Knowledge Area', 'Subject Of Investigation', 'Field Of Science', 'Keywords', 'Goals / Objectives', 'Project Methods','URL']
-outp.writerow(mainheader)
+ #outp.writerow(mainheader)
  
 outheader = ['Award Number','Period Start Date','Period End Date','Outputs','Impacts','Publications']
 # outcomereports.writerow(outheader) 
-"""
+
 for numb in links:
 
 	l = numb[0]
@@ -236,7 +236,7 @@ for numb in links:
 		pass
 
 	log.close()
-"""
+
 exit()
 
 print "The end"
